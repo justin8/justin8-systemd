@@ -75,6 +75,7 @@ service { 'foo:
 ## Limitations
 
 Works with all Linux distributions! (Untested on most ;))
+On non-systemd distributions it will provide the systemd_available fact as 'false', but nothing else (as intended).
 
 ## Development
 
