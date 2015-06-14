@@ -4,9 +4,9 @@
   "author": "justin8",
   "summary": "Systemd support helper",
   "license": "MIT",
-  "source": "https://github.com/justin8/justin8/systemd",
-  "project_page": "https://github.com/justin8/justin8/systemd",
-  "issues_url": "https://github.com/justin8/justin8/systemd/issues",
+  "source": "https://github.com/justin8/justin8-systemd",
+  "project_page": "https://github.com/justin8/justin8-systemd",
+  "issues_url": "https://github.com/justin8/justin8-systemd/issues",
   "operatingsystem_support": [
       {
           "operatingsystem": "Archlinux"
