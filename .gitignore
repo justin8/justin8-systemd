@@ -11,3 +11,6 @@ Session.vim
 ### puppet ###
 pkg
 spec/fixtures
+
+### ruby ###
+Gemfile.lock
