@@ -1,49 +1,39 @@
-# systemd
+i[![Build Status](https://travis-ci.org/justin8/justin8-ghost.svg?branch=master)](https://travis-ci.org/justin8/justin8-ghost)
+
+# Justin8-Systemd
 
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
+2. [Module Description](#module-description)
 3. [Setup - The basics of getting started with systemd](#setup)
     * [What systemd affects](#what-systemd-affects)
-    * [Setup requirements](#setup-requirements)
     * [Beginning with systemd](#beginning-with-systemd)
 4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
 5. [Limitations - OS compatibility, etc.](#limitations)
 6. [Development - Guide for contributing to the module](#development)
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+This module provides some basic functionality around systemd within puppet to better allow modules to support both systemd and legacy init systems within the same module.
 
 ## Module Description
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
+This module provides a fact to identify systemd-enabled systems and an exec that can be called to reload systemd daemon configurations.
 
 ## Setup
 
 ### What systemd affects
 
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
+* Nothing
 
 ### Beginning with systemd
+
+The module will do nothing by itself. It is only to be used as support for other modules.
+
+Check the usage section for details.
+
+
 
 The very basic steps needed for a user to get the module up and running.
 
@@ -53,27 +43,39 @@ for upgrading, you may wish to include an additional section here: Upgrading
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+The most basic usage is as follows (within another module):
 
-## Reference
+```
+include systemd
+```
+This will give you access to $::systemd::unit_path which is usually /usr/lib/systemd/system or /lib/systemd/system depending on distro.
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+It will also give you access to the systemd_available fact, which evaluates to 'true' if systemd is available.
+
+There is an exec called 'systemd-daemon-reload' that can be called to refresh configurations when they are changed so it isn't required seperately in each module.
+
+Hopefully this will be unecessary in future puppet releases, but currently there is no way to tell the init system, and no way to auto-reload systemd daemons when they change.
+
+An example usage is below:
+
+```
+if $::systemd_available == 'true' {
+    file {"${::systemd::unit_path}/foo.service":
+        content => template('foo/foo.service.erb'),
+        before  => Service['foo'],
+        notify  => Exec['systemd-daemon-reload'],
+    }
+}
+
+service { 'foo:
+    ensure => running,
+    after  => Exec['systemd-daemon-reload'],
+```
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+Works with all Linux distributions! (Untested on most ;))
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+Pull requests welcome via github.
