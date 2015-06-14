@@ -18,7 +18,7 @@ class systemd {
       $unit_path = '/usr/lib/systemd/system'
     }
     default: {
-      $unit_path = undef
+      $unit_path = '/usr/lib/systemd/system'
     }
   }
 
