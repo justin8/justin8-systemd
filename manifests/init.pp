@@ -4,6 +4,7 @@ class systemd {
     path        => '/bin:/usr/bin:/sbin:/usr/sbin',
     command     => 'systemctl daemon-reload',
     refreshonly => true,
+    before      => Class['service'],
   }
 
   case $::osfamily {
