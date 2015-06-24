@@ -1,3 +1,4 @@
+[![Puppet Forge](http://img.shields.io/puppetforge/v/justin8/systemd.svg)](https://forge.puppetlabs.com/justin8/systemd)
 [![Build Status](https://travis-ci.org/justin8/justin8-systemd.svg)](https://travis-ci.org/justin8/justin8-systemd)
 
 # Justin8-Systemd
