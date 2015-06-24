@@ -1,4 +1,4 @@
-i[![Build Status](https://travis-ci.org/justin8/justin8-ghost.svg?branch=master)](https://travis-ci.org/justin8/justin8-ghost)
+[![Build Status](https://travis-ci.org/justin8/justin8-systemd.svg)](https://travis-ci.org/justin8/justin8-systemd)
 
 # Justin8-Systemd
 
