@@ -1,14 +1,14 @@
 class systemd {
 
-  if $::systemd_available {
+  if ( str2bool("$::systemd_available") ) {
     exec { 'systemd-daemon-reload':
       path        => '/bin:/usr/bin:/sbin:/usr/sbin',
       command     => 'systemctl daemon-reload',
       refreshonly => true
     }
 
-   # refresh systemd before every service
-   Exec['systemd-daemon-reload'] -> Service<| |>
+    # refresh systemd before every service
+    Exec['systemd-daemon-reload'] -> Service<| |>
   }
 
   case $::osfamily {
