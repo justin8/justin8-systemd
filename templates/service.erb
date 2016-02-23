@@ -1,0 +1,32 @@
+[Unit]
+Description=<%= @description %>
+Requires=<%= @requires.sort.join(' ') %>
+Wants=syslog.target <%= @wants.sort.join(' ') %>
+After=syslog.target <%= @after.sort.join(' ') %>
+
+[Service]
+ExecStart=<%= @execstart %>
+<% if defined?(@execreload) -%>
+ExecReload=<%= @execreload %>
+<% end -%>
+<% if defined?(@execstop) -%>
+ExecStop=<%= @execstop %>
+<% end -%>
+<% if defined?(@workingdir) -%>
+WorkingDirectory=<%= @workingdir %>
+<% end -%>
+Restart=<%= @restart %>
+<% if defined?(@restartsec) -%>
+RestartSec=<%= @restartsec %>
+<% end -%>
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=<%= @servicename %>
+User=<%= @user %>
+Group=<%= @group %>
+<% if @forking -%>
+Type=forking
+<% end -%>
+
+[Install]
+WantedBy=<%= @wantedby.sort.join(' ') %>
