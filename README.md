@@ -66,11 +66,22 @@ if $::systemd_available == 'true' {
         before  => Service['foo'],
         notify  => Exec['systemd-daemon-reload'],
     }
+
+    systemd::service { 'bar':
+        description  => 'Bar service',
+        execstart    => '/bin/bar',
+        wants        => ['network.target', 'foo.service'],
+    }
 }
 
-service { 'foo:
+service { 'foo':
     ensure => running,
     after  => Exec['systemd-daemon-reload'],
+}
+
+service { 'bar':
+    ensure => running,
+}
 ```
 
 ## Limitations
