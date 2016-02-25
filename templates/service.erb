@@ -24,6 +24,9 @@ ExecReload=<%= @execreload %>
 <% if defined?(@execstop) -%>
 ExecStop=<%= @execstop %>
 <% end -%>
+<% if @remainafterexit -%>
+RemainAfterExit=yes
+<% end -%>
 <% if defined?(@workingdir) -%>
 WorkingDirectory=<%= @workingdir %>
 <% end -%>

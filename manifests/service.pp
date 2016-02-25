@@ -8,6 +8,7 @@ define systemd::service (
     $workingdir     = undef,
     $restart        = 'always',
     $restartsec     = undef,
+    $remainafterexit= false,
     $user           = 'root',
     $group          = 'root',
     $type           = undef,
