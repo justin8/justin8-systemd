@@ -10,7 +10,7 @@ define systemd::service (
     $restartsec     = undef,
     $user           = 'root',
     $group          = 'root',
-    $forking        = false,
+    $type           = undef,
     $defaultdeps    = true,
     $requires       = [],
     $conflicts      = [],

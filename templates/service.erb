@@ -36,8 +36,8 @@ StandardError=syslog
 SyslogIdentifier=<%= @servicename %>
 User=<%= @user %>
 Group=<%= @group %>
-<% if @forking -%>
-Type=forking
+<% if defined?(@type) -%>
+Type=<%= @type %>
 <% end -%>
 
 [Install]
