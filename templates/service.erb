@@ -7,10 +7,10 @@ DefaultDependencies=no
 Requires=<%= @requires.sort.join(' ') %>
 <% end -%>
 <% if @wants.any? -%>
-Wants=syslog.target <%= @wants.sort.join(' ') %>
+Wants=<%= @wants.sort.join(' ') %>
 <% end -%>
 <% if @after.any? -%>
-After=syslog.target <%= @after.sort.join(' ') %>
+After=<%= @after.sort.join(' ') %>
 <% end -%>
 
 [Service]

@@ -13,8 +13,8 @@ define systemd::service (
     $forking        = false,
     $defaultdeps    = true,
     $requires       = [],
-    $wants          = [],
-    $after          = [],
+    $wants          = ['syslog.target'],
+    $after          = ['syslog.target'],
     $wantedby       = ['multi-user.target'],
 ) {
 
