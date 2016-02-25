@@ -11,6 +11,7 @@ define systemd::service (
     $user           = 'root',
     $group          = 'root',
     $forking        = false,
+    $defaultdeps    = true,
     $requires       = [],
     $wants          = [],
     $after          = [],

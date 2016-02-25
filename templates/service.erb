@@ -1,5 +1,8 @@
 [Unit]
 Description=<%= @description %>
+<% if !@defaultdeps -%>
+DefaultDependencies=no
+<% end -%>
 Requires=<%= @requires.sort.join(' ') %>
 Wants=syslog.target <%= @wants.sort.join(' ') %>
 After=syslog.target <%= @after.sort.join(' ') %>
