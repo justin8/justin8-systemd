@@ -3,9 +3,15 @@ Description=<%= @description %>
 <% if !@defaultdeps -%>
 DefaultDependencies=no
 <% end -%>
+<% if @requires.any? -%>
 Requires=<%= @requires.sort.join(' ') %>
+<% end -%>
+<% if @wants.any? -%>
 Wants=syslog.target <%= @wants.sort.join(' ') %>
+<% end -%>
+<% if @after.any? -%>
 After=syslog.target <%= @after.sort.join(' ') %>
+<% end -%>
 
 [Service]
 ExecStart=<%= @execstart %>
