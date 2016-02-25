@@ -3,6 +3,9 @@ Description=<%= @description %>
 <% if !@defaultdeps -%>
 DefaultDependencies=no
 <% end -%>
+<% if @conflicts.any? -%>
+Conflicts=<%= @conflicts.sort.join(' ') %>
+<% end -%>
 <% if @requires.any? -%>
 Requires=<%= @requires.sort.join(' ') %>
 <% end -%>
