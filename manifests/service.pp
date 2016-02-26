@@ -18,6 +18,7 @@ define systemd::service (
     $wants          = ['syslog.target'],
     $after          = ['syslog.target'],
     $wantedby       = ['multi-user.target'],
+    $syslog         = true,
 ) {
 
     include systemd

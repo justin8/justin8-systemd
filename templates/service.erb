@@ -10,10 +10,10 @@ Conflicts=<%= @conflicts.sort.join(' ') %>
 Requires=<%= @requires.sort.join(' ') %>
 <% end -%>
 <% if @wants.any? -%>
-Wants=<%= @wants.sort.join(' ') %>
+Wants=<% if @syslog %>syslog <% end %><%= (@wants - ['syslog']).sort.join(' ') %>
 <% end -%>
 <% if @after.any? -%>
-After=<%= @after.sort.join(' ') %>
+After=<% if @syslog %>syslog <% end %><%= (@after - ['syslog']).sort.join(' ') %>
 <% end -%>
 
 [Service]
@@ -34,9 +34,11 @@ Restart=<%= @restart %>
 <% if defined?(@restartsec) -%>
 RestartSec=<%= @restartsec %>
 <% end -%>
+<% if @syslog -%>
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=<%= @servicename %>
+<% end -%>
 User=<%= @user %>
 Group=<%= @group %>
 <% if defined?(@type) -%>
