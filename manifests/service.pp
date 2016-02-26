@@ -24,6 +24,14 @@ define systemd::service (
     include systemd
 
     validate_re($restart, ['^always$', '^no$', '^on-(success|failure|abnormal|abort|watchdog)$'], "Not a supported restart type: ${restart}")
+    validate_bool($remainafterexit)
+    validate_bool($defaultdeps)
+    validate_array($requires)
+    validate_array($conflicts)
+    validate_array($wants)
+    validate_array($after)
+    validate_array($wantedby)
+    validate_bool($syslog)
 
     file { "${::systemd::unit_path}/${servicename}.service":
         ensure  => 'present',
