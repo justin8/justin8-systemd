@@ -25,6 +25,9 @@ define systemd::service (
 
     validate_re($restart, ['^always$', '^no$', '^on-(success|failure|abnormal|abort|watchdog)$'], "Not a supported restart type: ${restart}")
     validate_bool($remainafterexit)
+    if $type != undef {
+      validate_re($type, ['^simple$', '^forking$', '^oneshot$', '^dbus$', '^notify$', '^idle$'])
+    }
     validate_bool($defaultdeps)
     validate_array($requires)
     validate_array($conflicts)
