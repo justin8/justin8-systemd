@@ -10,10 +10,10 @@ Conflicts=<%= @conflicts.sort.join(' ') %>
 Requires=<%= @requires.sort.join(' ') %>
 <% end -%>
 <% if @wants.any? -%>
-Wants=<% if @syslog %>syslog <% end %><%= (@wants - ['syslog']).sort.join(' ') %>
+Wants=<% if @syslog %>syslog.target <% end %><%= (@wants - ['syslog.target']).sort.join(' ') %>
 <% end -%>
 <% if @after.any? -%>
-After=<% if @syslog %>syslog <% end %><%= (@after - ['syslog']).sort.join(' ') %>
+After=<% if @syslog %>syslog.target <% end %><%= (@after - ['syslog.target']).sort.join(' ') %>
 <% end -%>
 
 [Service]

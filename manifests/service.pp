@@ -15,8 +15,8 @@ define systemd::service (
     $defaultdeps    = true,
     $requires       = [],
     $conflicts      = [],
-    $wants          = ['syslog.target'],
-    $after          = ['syslog.target'],
+    $wants          = [],
+    $after          = [],
     $wantedby       = ['multi-user.target'],
     $syslog         = true,
 ) {
