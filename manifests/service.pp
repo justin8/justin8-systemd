@@ -18,8 +18,8 @@ define systemd::service (
     $wants          = [],
     $after          = [],
     $wantedby       = ['multi-user.target'],
-    $syslog         = true,
-) {
+    $unit_path      = $systemd::params::unit_path
+) inherits systemd::params {
 
     include systemd
 
@@ -36,7 +36,7 @@ define systemd::service (
     validate_array($wantedby)
     validate_bool($syslog)
 
-    file { "${::systemd::unit_path}/${servicename}.service":
+    file { "${unit_path}/${servicename}.service":
         ensure  => 'present',
         owner   => 'root',
         group   => 'root',

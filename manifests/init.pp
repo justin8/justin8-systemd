@@ -12,20 +12,4 @@ class systemd {
     Exec['systemd-daemon-reload'] -> Service<| |>
   }
 
-  case $::osfamily {
-    'Archlinux': {
-      $unit_path = '/etc/systemd/system'
-    }
-    'Debian': {
-      $unit_path = '/etc/systemd/system'
-    }
-    'RedHat': {
-      $unit_path = '/etc/systemd/system'
-    }
-    default: {
-      $unit_path = '/etc/systemd/system'
-    }
-  }
-
-
 }
