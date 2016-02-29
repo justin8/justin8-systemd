@@ -41,9 +41,7 @@ SyslogIdentifier=<%= @servicename %>
 <% end -%>
 User=<%= @user %>
 Group=<%= @group %>
-<% if defined?(@type) -%>
 Type=<%= @type %>
-<% end -%>
 
 [Install]
 WantedBy=<%= @wantedby.sort.join(' ') %>
