@@ -49,7 +49,7 @@ The most basic usage is as follows (within another module):
 ```
 include systemd
 ```
-This will give you access to $::systemd::unit_path which is usually /usr/lib/systemd/system or /lib/systemd/system depending on distro.
+This will give you access to $::systemd::params::unit_path which is usually /usr/lib/systemd/system or /lib/systemd/system depending on distro.
 
 It will also give you access to the systemd_available fact, which evaluates to 'true' if systemd is available.
 
@@ -61,7 +61,7 @@ An example usage is below:
 
 ```
 if $::systemd_available == 'true' {
-    file {"${::systemd::unit_path}/foo.service":
+    file {"${::systemd::params::unit_path}/foo.service":
         content => template('foo/foo.service.erb'),
         before  => Service['foo'],
         notify  => Exec['systemd-daemon-reload'],
