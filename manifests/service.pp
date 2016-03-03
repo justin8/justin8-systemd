@@ -13,7 +13,6 @@ define systemd::service (
     $group           = 'root',
     $type            = 'simple',
     $defaultdeps     = true,
-    $syslog          = true,
     $requires        = [],
     $conflicts       = [],
     $wants           = [],
@@ -33,7 +32,6 @@ define systemd::service (
     validate_array($wants)
     validate_array($after)
     validate_array($wantedby)
-    validate_bool($syslog)
 
     file { "${unit_path}/${servicename}.service":
         ensure  => 'present',
