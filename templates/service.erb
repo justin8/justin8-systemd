@@ -1,0 +1,43 @@
+[Unit]
+Description=<%= @description %>
+<% if !@defaultdeps -%>
+DefaultDependencies=no
+<% end -%>
+<% if @conflicts.any? -%>
+Conflicts=<%= @conflicts.sort.join(' ') %>
+<% end -%>
+<% if @requires.any? -%>
+Requires=<%= @requires.sort.join(' ') %>
+<% end -%>
+<% if @wants.any? -%>
+Wants=<%= @wants.sort.join(' ') %>
+<% end -%>
+<% if @after.any? -%>
+After=<%= @after.sort.join(' ') %>
+<% end -%>
+
+[Service]
+ExecStart=<%= @execstart %>
+<% if defined?(@execreload) -%>
+ExecReload=<%= @execreload %>
+<% end -%>
+<% if defined?(@execstop) -%>
+ExecStop=<%= @execstop %>
+<% end -%>
+<% if @remainafterexit -%>
+RemainAfterExit=yes
+<% end -%>
+<% if defined?(@workingdir) -%>
+WorkingDirectory=<%= @workingdir %>
+<% end -%>
+Restart=<%= @restart %>
+<% if defined?(@restartsec) -%>
+RestartSec=<%= @restartsec %>
+<% end -%>
+SyslogIdentifier=<%= @servicename %>
+User=<%= @user %>
+Group=<%= @group %>
+Type=<%= @type %>
+
+[Install]
+WantedBy=<%= @wantedby.sort.join(' ') %>
