@@ -9,9 +9,6 @@ class systemd {
       command     => 'systemctl daemon-reload',
       refreshonly => true
     }
-
-    # refresh systemd before every service
-    Exec['systemd-daemon-reload'] -> Service<| |>
   }
 
 }
