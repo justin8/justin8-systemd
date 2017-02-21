@@ -1,9 +1,12 @@
 #
 define systemd::service (
     $execstart,
+    $execstartpre    = undef,
+    $execstartpost   = undef,
     $servicename     = $name,
     $description     = '',
     $execstop        = undef,
+    $execstoppost    = undef,
     $execreload      = undef,
     $workingdir      = undef,
     $restart         = 'always',

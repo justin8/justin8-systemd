@@ -18,11 +18,20 @@ After=<%= @after.sort.join(' ') %>
 
 [Service]
 ExecStart=<%= @execstart %>
+<% if defined?(@execstartpre) -%>
+ExecStartPre=<%= @execstartpre %>
+<% end -%>
+<% if defined?(@execstartpost) -%>
+ExecStartPost=<%= @execstartpost %>
+<% end -%>
 <% if defined?(@execreload) -%>
 ExecReload=<%= @execreload %>
 <% end -%>
 <% if defined?(@execstop) -%>
 ExecStop=<%= @execstop %>
+<% end -%>
+<% if defined?(@execstoppost) -%>
+ExecStopPost=<%= @execstoppost %>
 <% end -%>
 <% if @remainafterexit -%>
 RemainAfterExit=yes
