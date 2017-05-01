@@ -49,4 +49,28 @@ define systemd::service (
     notify  => Exec['systemd-daemon-reload'],
     require => Package[$::systemd::params::package_name],
   }
+
+  $enabled_test_command = "systemctl is-enabled ${servicename}"
+  if $ensure == 'present' {
+    $enable_command = "systemctl enable ${servicename}"
+  } else {
+    $enable_command = "systemctl disable ${servicename}"
+  }
+
+  exec { "systemd-daemon-enable ${servicename}":
+    path    => '/bin:/usr/bin:/sbin:/usr/sbin',
+    command => $enable_command,
+    unless  => $ensure ? {
+      present => $enabled_test_command,
+      default => "false",
+    },
+    onlyif => $ensure ? {
+      present => "true",
+      default => $enabled_test_command,
+    },
+    require => [
+      File["${real_unit_path}/${servicename}.service"],
+      Package[$::systemd::params::package_name],
+    ],
+  }
 }
